@@ -1,0 +1,144 @@
+@use '../abstracts/'as abs;
+
+.nav-hamburger-btn {
+    @include abs.resetInput();
+    @include abs.flex(center, center);
+    cursor: pointer;
+    padding: 1em;
+
+    svg {
+        fill: abs.$Grayish-Violet;
+        height: 21px;
+    }
+}
+
+.nav-container {
+    animation: nav-open-animate 350ms ease-out;
+    background-color: abs.$primary-dark-violet;
+    border-radius: .75em;
+    padding: 1.5em;
+    position: absolute;
+    right: 0;
+    top: calc(100% - 1.5em);
+    width: min(100%, 500px);
+    pointer-events: none;
+    transform-origin: top right;
+    transition: all 350ms ease;
+    transform: scale(0);
+    z-index: 100;
+
+    .nav-list {
+        opacity: 0;
+        list-style: none;
+        transition: all 350ms ease;
+        width: inherit;
+
+        li {
+            @include abs.flex(center, center, column);
+            width: inherit;
+
+            .nav-link {
+                color: white;
+                font-weight: map-get(abs.$poppins-weight, semiBold);
+                padding: .5em;
+                text-decoration: none;
+                transition: all 350ms ease;
+                z-index: 150;
+
+                &:not(#navSignUp):hover {
+                    @include abs.hoverEvent('navLink', abs.$primary-cyan, white);
+                }
+            }
+        }
+
+
+        li:not(:first-child) {
+            margin-top: .75em;
+        }
+
+        #navSignUp {
+            background-color: abs.$primary-cyan;
+            border-radius: 2em;
+            text-align: center;
+            width: 100%;
+
+            &:hover {
+                @include abs.hoverEvent('navLink', abs.$primary-dark-violet);
+            }
+        }      
+    }
+
+    .nav-list-1 {
+        padding-bottom: 1em;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.123);
+    }
+
+    .nav-list-2 {
+        padding-bottom: .75em;
+        margin-top: 1em;
+    }
+
+    &.nav-open {
+        transform: scale(1);
+        pointer-events: all;
+
+        .nav-list {
+            opacity: 1;
+            transition-delay: 350ms;
+        }
+    }
+}
+
+@media (min-width: 765px) {
+    .nav-hamburger-btn {
+        display: none;
+    }
+
+    .nav-container {
+        @include abs.flex(space-between, center);
+        background-color: transparent;
+        flex-grow: 1;
+        pointer-events: all;
+        position: static;
+        transform: scale(1);
+        width: max-content;
+
+        .nav-list {
+            @include abs.flex(center, center, row, nowrap, 2rem);
+            padding-bottom: 0;
+            opacity: 1;
+
+            li:not(:first-child) {
+                margin-top: 0;
+            }
+
+            li {
+                .nav-link:not(#navSignUp) {
+                    color: abs.$Grayish-Violet;
+                    padding: 0;
+
+                    &:hover {
+                        @include abs.hoverEvent('navLink', abs.$primary-dark-violet);
+                    }
+                }
+
+                #navSignUp {
+                    padding: .5em 1.5em;
+
+                    &:hover {
+                        @include abs.hoverEvent('mainButton', abs.$primary-cyan, white);
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        .nav-list-1 {
+            border-bottom: none;
+        }
+
+        .nav-list-2 {
+            margin-top: 0;
+        }
+    }
+}

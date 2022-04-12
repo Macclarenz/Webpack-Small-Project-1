@@ -1,0 +1,51 @@
+@mixin flex($justify, $align, $direction: row, $wrap: wrap, $gap: 0) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    gap: $gap
+}
+
+@mixin hoverEvent($isIcon: 'false', $bg-color, $currentColor: white, $amount: 20%) {
+    @if $isIcon=='true' {
+        fill: $bg-color
+    }
+
+    @if $isIcon=='false' {
+        background-color: $bg-color;
+        color: $currentColor;
+    }
+
+    @if $isIcon=='navLink' {
+        color: $bg-color;
+    }
+
+    @if $isIcon=='textLink' {
+        color: $bg-color;
+    }
+
+    @if $isIcon=='mainButton' {
+        background-color: lighten($bg-color, $amount);
+    }
+}
+
+@mixin descendingColumns($tagElement, $start, $end, $margin-top) {
+    @if $start>$end {
+        @error 'the start value is greater than end value';
+    }
+
+    @if $tagElement=='section' {
+        @for $i from $start to $end {
+            section:nth-of-type(#{$i}) {
+                margin-top: calc($margin-top * $i);
+            }
+        }
+    }
+}
+
+@mixin resetInput() {
+    background-color: unset;
+    border: none;
+    outline: none;
+}

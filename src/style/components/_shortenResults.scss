@@ -1,0 +1,102 @@
+@use '../abstracts/' as abs;
+
+.shorten-result-container {
+    width: 90%;
+    margin: -3.5em auto 0;
+}
+
+.shorten-link-container {
+    animation: animate-shorten 750ms cubic-bezier(0.03, 0.7, 0.47, 1.18);
+    background-color: white;
+    border-radius: .25em;
+
+    & * {
+        font-family: abs.$poppins;
+    }
+
+    .shorten-original-link,  
+    .shorten-copy-btn {
+        font-size: 16px;
+    }
+
+    .shorten-original-link {
+        border-bottom: 1px solid abs.$neutral-Gray;
+        color: abs.$primary-dark-violet;
+        font-weight: map-get(abs.$poppins-weight, medium);
+        padding: 1em;
+    }
+
+    .shorten-result {
+        padding: 1em;
+
+        .shorten-link {
+            color: abs.$primary-cyan;
+            font-weight: map-get(abs.$poppins-weight, medium);
+            margin-bottom: .5em;
+        }
+
+        .shorten-copy-btn {
+            @include abs.resetInput();
+            background-color: abs.$primary-cyan;
+            border-radius: .25em;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: map-get(abs.$poppins-weight, bold);
+            padding: .5em 1em;
+            text-align: center;
+            transition: all 350ms ease;
+            width: 100%;
+
+            &:hover {
+                @include abs.hoverEvent('mainButton', abs.$primary-cyan);
+            }
+
+            &.shorten-copied {
+                background-color: abs.$primary-dark-violet;
+                pointer-events: none;
+            }
+        }
+    }
+
+    &:not(:first-child) {
+        margin-top: 1.5em;
+    }
+
+    @keyframes animate-shorten {
+        0% {
+            transform: translateY(2em);
+            opacity: 0;
+        } 100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
+@media (min-width: 765px) {
+    .shorten-result-container {
+        .shorten-result {
+            @include abs.flex(space-between, center, row);
+
+            .shorten-copy-btn {
+                width: 7em;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .shorten-link-container {
+        @include abs.flex(space-between, center, row, nowrap, 2em);
+
+        .shorten-original-link {
+            border-bottom: none;
+        }
+
+        .shorten-result {
+            flex-wrap: nowrap;
+            gap: 1em
+        }
+    }
+}

@@ -1,0 +1,88 @@
+@use '../abstracts/' as abs;
+
+.hero-container {
+    @include abs.flex(center, center, column-reverse);
+    margin: 0 auto;
+    padding-bottom: 5em;
+    width: 90%;
+
+    .hero-img {
+        display: block;
+        margin-block: .5em 4em;
+        max-width: min(680px, 100%);
+        transform: translateX(4em) scale(1.25);
+    }
+
+    .hero-text-container {
+        text-align: center;
+
+        & > *:not(:first-child) {
+            margin-top: 1.35em;
+        }
+
+        & > h1 {
+            color: abs.$header-Very-Dark-Violet;
+            font-size: 40px;
+            font-weight: map-get(abs.$poppins-weight, extraBold);
+            line-height: 1.2;
+        }
+
+        & > p {
+            color: abs.$Grayish-Violet;
+            font-weight: map-get(abs.$poppins-weight, medium);
+        }
+
+        .hero-getting-started {
+            background-color: abs.$primary-cyan;
+            border-radius: 2em;
+            color: white;
+            display: inline-block;
+            font-weight: map-get(abs.$poppins-weight, semiBold);
+            padding: .65em 2.25em;
+            text-decoration: none;
+            transition: all 350ms ease;
+
+            &:hover {
+                @include abs.hoverEvent('mainButton', abs.$primary-cyan);
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-container {
+        @include abs.flex(space-between, center, row, nowrap, 2em);
+        // flex-basis: 50%;
+
+        .hero-text-container, .hero-img {
+            width: 50%;
+        }
+
+        .hero-text-container {
+            text-align: left;
+
+            & > *:not(:first-child) {
+                margin-top: .5em;
+            }
+
+            & > h1 {
+                font-size: min(72px, 5vw);
+            }
+
+            & > p {
+                font-size: 18px;
+                width: min(100%, 50ch);
+            }
+
+            .hero-getting-started {
+                margin-top: 1.75em;
+            }
+        }
+
+        .hero-img {
+            display: flex;
+            max-width: 650px;
+            transform: scale(1.2) translate(min(30%, 5em), 2em);
+        }
+    }
+}

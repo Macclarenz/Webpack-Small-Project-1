@@ -1,0 +1,133 @@
+@use '../abstracts/'as abs;
+
+.as-container,
+.as-article-container {
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+
+    &>h2,
+    section>h3 {
+        color: abs.$header-Very-Dark-Violet;
+        font-weight: map-get(abs.$poppins-weight, bold);
+        margin-bottom: .75em;
+    }
+
+    &>p,
+    section>p {
+        color: abs.$Grayish-Violet;
+        font-weight: map-get(abs.$poppins-weight, medium);
+    }
+}
+
+.as-container {
+    margin-block: 5em;
+
+    &>h2 {
+        font-size: 28px;
+    }
+}
+
+.as-article-container {
+    position: relative;
+
+    section {
+        background-color: white;
+        border-radius: .25em;
+        padding-inline: 1em;
+        padding-block: 5em 2em;
+        position: relative;
+        z-index: 10;
+
+        &>*:not(img) {
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .img-container {
+            background-color: abs.$primary-dark-violet;
+            border-radius: 50%;
+            display: flex;
+            position: absolute;
+            transform: translateY(-4em);
+            height: 80px;
+            width: 80px;
+
+            top: 1.5em;
+            left: 0;
+            right: 0;
+
+            &>img {
+                padding: 20px;
+            }
+        }
+
+        &>h3 {
+            font-size: 21px;
+        }
+
+        &:not(:first-child) {
+            margin-top: 5em;
+        }
+    }
+
+    &::before {
+        background-color: abs.$primary-cyan;
+        content: '';
+        display: inline-block;
+        height: 100%;
+        position: absolute;
+        right: 50%;
+        transform: rotate(0deg) translateX(50%);
+        transform-origin: top;
+        width: 7px;
+        animation: lineAnimate 2000ms ease-out 750ms;
+    }
+
+    @keyframes lineAnimate {
+        0% {
+            transform: scaleY(0) translateX(50%);
+        }
+
+        100% {
+            transform: scaleY(1) translateX(50%);
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .as-article-container {
+        @include abs.flex(space-between, flex-start, row, wrap, 2em);
+
+        section {
+            flex: 30% 1;
+
+            &:not(:first-child) {
+                margin-top: 0;
+            }
+        }
+
+        @include abs.descendingColumns('section', 1, 4, 3em);
+
+        &::before {
+            content: '';
+            animation: lineAnimate 2000ms ease-out 750ms;
+            left: 0;
+            right: 0;
+            height: 7px;
+            width: 100%;
+            transform: translateY(12em);
+            transform-origin: left;
+        }
+
+        @keyframes lineAnimate {
+            0% {
+                transform: scaleX(0) translateY(12em);
+            }
+    
+            100% {
+                transform: scaleX(1) translateY(12em);
+            }
+        }
+    }
+}

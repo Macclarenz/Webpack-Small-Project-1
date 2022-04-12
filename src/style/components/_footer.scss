@@ -1,0 +1,110 @@
+@use '../abstracts/'as abs;
+
+footer {
+    background-color: abs.$footer-background-color;
+    padding: 3em 1em;
+
+    & > * {
+        text-align: center;
+    }
+
+    .footer-logo-link {
+        @include abs.flex(center, center);
+        margin-bottom: 2em;
+
+        .footer-logo path {
+            fill: abs.$background-grey;
+        }
+    }
+
+    .footer-list, 
+    .social-list {
+        list-style: none;
+    }
+
+    .footer-list {
+
+        & li:first-child {
+            color: abs.$background-grey;
+            font-weight: map-get(abs.$poppins-weight, medium);
+            margin-bottom: 1em;
+        }
+
+        & li:not(:first-child) {
+            margin-top: .5em;
+        }
+
+        li a {
+            color: abs.$neutral-Gray;
+            font-size: 14px;
+            font-weight: map-get(abs.$poppins-weight, regular);
+            text-decoration: none;
+            transition: all 350ms ease;
+
+            &:hover {
+                @include abs.hoverEvent('textLink', abs.$primary-cyan);
+            }
+        }
+
+        &:not(:first-child) {
+            margin-top: 2em;
+        }
+    }
+
+    .social-list {
+        @include abs.flex(center, center, row, wrap, 1.25em);
+        margin-block: 3em;
+
+        li .footer-social-link {
+            svg path {
+                transition: all 350ms ease;
+            }
+
+            &:hover svg path {
+                @include abs.hoverEvent('true', abs.$primary-cyan);
+            }
+        }
+    }
+}
+
+@media (min-width: 756px) {
+    footer {
+        .footer-links-container {
+            @include abs.flex(space-evenly, flex-start, row, nowrap, 4em);
+            margin: 0 auto;
+            width: 90%;
+
+            .footer-list {
+                text-align: left;
+
+                &:not(:first-child) {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    footer {
+        @include abs.flex(space-between, flex-start, row, nowrap, 0em);
+
+        .footer-logo-link {
+            flex: min(250px, 30%) 2 1;
+            justify-content: flex-start;
+            margin-left: 5%;
+        }
+
+        .footer-links-container {
+            flex: min(500px, 30%) 2 1;
+            gap: min(7em, 100%);
+            justify-content: flex-start;
+        }
+
+        .social-list {
+            align-items: flex-start;
+            margin-top: 0;
+            margin-right: 5%;
+        }
+    }
+}

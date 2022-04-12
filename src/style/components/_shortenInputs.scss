@@ -1,0 +1,89 @@
+@use '../abstracts/'as abs;
+
+.shorten-container {
+    background-color: abs.$primary-dark-violet;
+    background-image: url('../images/bg-shorten-mobile.svg');
+    background-position: right;
+    background-position-y: -.5em;
+    background-repeat: no-repeat;
+    border-radius: .75em;
+    margin: 5em auto 0;
+    padding: 1.25em;
+    position: relative;
+    transform: translateY(-5em);
+    width: 90%;
+
+    .shorten-input-text-container #shortenInputText,
+    #shortenSubmitBtn {
+        @include abs.resetInput();
+        border-radius: .5em;
+        padding: 1em;
+        width: 100%;
+    }
+
+    .shorten-input-text-container #shortenInputText {
+        background-color: white;
+        font-size: 16px;
+        font-weight: map-get(abs.$poppins-weight, semiBold);
+
+        &::placeholder {
+            color: abs.$neutral-Gray;
+        }
+
+        &.shorten-text-error {
+            border: 2px solid abs.$secondary;
+
+            &::placeholder {
+                color: abs.$secondary;
+                opacity: .5;
+            }
+        }
+    }
+
+    .shorten-message {
+        color: abs.$secondary;
+        font-size: 12px;
+        margin-block: .5em 1em;
+    }
+
+    #shortenSubmitBtn {
+        align-self: flex-start;
+        background-color: abs.$primary-cyan;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: map-get(abs.$poppins-weight, bold);
+        transition: all 350ms ease;
+
+        &:hover {
+            @include abs.hoverEvent('mainButton', abs.$primary-cyan);
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .shorten-container {
+        @include abs.flex(space-between, center, row, nowrap, 1.5em);
+        background-image: url('../images/bg-shorten-desktop.svg');
+        background-size: cover;
+        background-position: center;
+        padding: 3em;
+
+        .shorten-input-text-container {
+            flex: 80% 2 1;
+            position: relative;
+
+            #shortenInputText {
+                margin-bottom: 0;
+            }
+
+            .shorten-message {
+                position: absolute;
+            }
+        }
+
+        #shortenSubmitBtn {
+            flex: 20% 1 2;
+        }
+    }
+}

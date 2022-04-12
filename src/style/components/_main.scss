@@ -1,0 +1,11 @@
+@use '../abstracts/' as abs;
+
+@use './shortenInputs';
+@use './as';
+@use './aside';
+@use './shortenResults';
+
+main {
+    background-color: abs.$background-grey;
+    padding-bottom: 5em;
+}
